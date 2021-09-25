@@ -1,12 +1,23 @@
 <%- include("partials/header"); -%>
     <h1> Home </h1>
     <p> <%= startingContent %> </p>
+<% if(posts.length !== 0){ %>
+
 
 <% posts.forEach(function(post) { %>
-    <h1><%= post.title %></h1>
-    <p><%= post.content.substring(0,100)+"..." %>
+  <div class="button"> <h1><%= post.title %></h1>
+    <form action="/delete" method="post"> 
+      <button class="btn btn-danger btn-lg" type="submit" name="button" value="<%= post._id %>" > 
+      <i class="fas fa-trash-alt"></i> 
+      </button>
+    </form>
+    </div>
+    <p><%= post.content.substring(0,140)+"..." %>
       <a href="/posts/<%= post._id %>">Read More</a>
     </p>
  <% }) %>
-
+  
+ <% } else{ %>
+    <h1>you dont have any post</h1>
+ <% } %>
 <%- include("partials/footer"); -%>
